@@ -11,10 +11,10 @@
                  ]
 
   :profiles {:dev {:dependencies [[org.clojure/clojurescript "0.0-2014"]
-                                  [speclj "2.9.0"]
-                                  [specljs "2.9.0"]]}}
-  :plugins [[speclj "2.9.0"]
-            [specljs "2.9.0"]
+                                  [speclj "2.9.1"]
+                                  [specljs "2.9.1"]]}}
+  :plugins [[speclj "2.9.1"]
+            [specljs "2.9.1"]
             [lein-cljsbuild "1.0.0"]]
 
   :cljsbuild ~(let [run-specs ["bin/specljs" "js/filament.js"]]

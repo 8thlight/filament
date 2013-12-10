@@ -90,23 +90,26 @@
       (event/listen! animation "end" #(dom/set-style! node :background-color initial-color))
       (play animation options))))
 
-(defn fade-checkmark [node]
-  (let [check-mark (dom/single-node (h/html [:img.decoration {:src "/images/check.png"}]))]
-    (dom/append! node check-mark)
-    (show! check-mark)
-    (fade-out check-mark :duration 2000 :on-finish #(dom/detach! check-mark))))
+(defn fade-checkmark
+  ([node] (fade-checkmark node "check.png"))
+  ([node image]
+    (let [check-mark (dom/single-node (h/html [:img.decoration {:src (str "/images/" image)}]))]
+      (dom/append! node check-mark)
+      (show! check-mark)
+      (fade-out check-mark :duration 2000 :on-finish #(dom/detach! check-mark)))))
 
-(defn add-spinner [node]
-  (let [spinner (dom/single-node (h/html [:img.snake-spinner.decoration {:src "/images/snake_spinner.gif"}]))]
-    (dom/append! node spinner)
-    (show! spinner)))
+(defn add-spinner
+  ([node] (add-spinner node "snake_spinner.gif"))
+  ([node image]
+    (let [spinner (dom/single-node (h/html [:img.filament-spinner.decoration {:src (str "/images/" image)}]))]
+      (dom/append! node spinner)
+      (show! spinner))))
 
 (defn remove-spinner [node]
-  (dom/detach! (css/sel node ".snake-spinner")))
+  (dom/detach! (css/sel node ".filament-spinner")))
 
 (defn has-spinner? [node]
-  (> (count (dom/nodes (css/sel node ".snake-spinner"))) 0))
-
+  (> (count (dom/nodes (css/sel node ".filament-spinner"))) 0))
 
 ; MDM - For testing
 ; Forego the pleasantries. Just get 'er done!
