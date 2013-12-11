@@ -47,11 +47,17 @@
         (should= "foobar" (inplace/inplace-value (inplace/input-node result)))))
 
     (defmethod inplace/inplace-value "whacky" [input] "WHACKY VALUE!")
+    (defmethod inplace/display-value "whacky" [input model field-key] [model field-key])
     (defmethod inplace/set-inplace-value "whacky" [input] "???")
 
     (it "gets the value from custom inputs"
       (let [result (dom/single-node (h/html (inplace/inplace-field "abc123" [:div#custom {:type "whacky"}])))]
         (should= "WHACKY VALUE!" (inplace/inplace-value (inplace/input-node result)))))
+
+    (it "gets the value from custom inputs"
+      (let [result (dom/single-node (h/html (inplace/inplace-field "abc123" [:div#custom {:type "whacky"}])))]
+        (should= [{:my :model} :the-field-key]
+                 (inplace/display-value (inplace/input-node result) {:my :model} :the-field-key))))
 
     )
 

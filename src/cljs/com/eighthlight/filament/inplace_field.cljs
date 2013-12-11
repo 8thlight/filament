@@ -25,6 +25,10 @@
 (defn input-node [e] (nth (dom/children (input-container e)) 1))
 (defn errors-node [e] (nth (dom/children (input-container e)) 0))
 
+(defmulti display-value #(dom/attr % "type"))
+(defmethod display-value :default [input model field-key]
+  (str (get model field-key)))
+
 (defmulti inplace-value #(dom/attr % "type"))
 (defmethod inplace-value :default [node] (dom/value node))
 
@@ -46,13 +50,6 @@
 (defmethod register-escape-callback :default [node callback]
   (event/listen! node :keyup (fn [e] (when (util/ESC? e) (callback)))))
 
-
-(defn display-value [model field-key]
-  (when-let [value (get model field-key)]
-    (if (map? value)
-      (:display-value value)
-      (str value))))
-
 (defn- display-errors [field errors]
   (let [html (apply str (map #(str "<p>" % "</p>") errors))
         errors-n (errors-node field)]
@@ -72,7 +69,7 @@
         field-key (dom/get-data e :field-key)]
     (fx/hide! (input-container e))
     (fx/remove-spinner (input-container e))
-    (dom/set-text! (value-node e) (display-value model field-key))
+    (dom/set-text! (value-node e) (display-value e model field-key))
     (fx/show! (value-container e))
     (hide-errors e)
     (dom/set-data! e :mode :view)))
