@@ -1,4 +1,4 @@
-(defproject com.8thlight/filament "1.0.0"
+(defproject com.8thlight/filament "1.1.0"
   :description "Rich client utilities"
   :url "http://github.com/8thlight/filament"
   :license {:name "Eclipse Public License"
