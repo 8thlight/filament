@@ -69,7 +69,7 @@
         field-key (dom/get-data e :field-key)]
     (fx/hide! (input-container e))
     (fx/remove-spinner (input-container e))
-    (dom/set-text! (value-node e) (display-value e model field-key))
+    (dom/set-text! (value-node e) (display-value (input-node e) model field-key))
     (fx/show! (value-container e))
     (hide-errors e)
     (dom/set-data! e :mode :view)))
