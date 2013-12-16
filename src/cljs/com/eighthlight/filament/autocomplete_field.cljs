@@ -9,8 +9,10 @@
             [domina.events :as event]
             [goog.style]))
 
+(defn- dropdown [] (dom/by-id "autocomplete-dropdown"))
+
 (defn active-options []
-  (if-let [dropdown (dom/by-id "autocomplete-dropdown")]
+  (if-let [dropdown (dropdown)]
     (dom/children dropdown)))
 
 (defn handle-possible-search [text-field callback e]
@@ -24,7 +26,6 @@
     "keyup"
     (partial handle-possible-search text-field callback)))
 
-(defn- dropdown [] (dom/by-id "autocomplete-dropdown"))
 
 (defn- close-dropdown []
   (when-let [dropdown (dropdown)]
