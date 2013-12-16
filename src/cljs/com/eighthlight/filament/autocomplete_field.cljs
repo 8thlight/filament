@@ -15,8 +15,11 @@
   (if-let [dropdown (dropdown)]
     (dom/children dropdown)))
 
+(def navigation-keys 
+	#{util/ENTER util/ESC util/DOWN_ARROW util/UP_ARROW util/LEFT_ARROW util/RIGHT_ARROW})
+
 (defn handle-possible-search [text-field callback e]
-  (when-not (#{util/ENTER util/ESC} (.-keyCode e)) ; don't search on selection
+  (when-not (navigation-keys (.-keyCode e)) ; don't search on selection
     (let [search-term (dom/value text-field)]
       (callback search-term))))
 
@@ -25,7 +28,6 @@
     text-field
     "keyup"
     (partial handle-possible-search text-field callback)))
-
 
 (defn- close-dropdown []
   (when-let [dropdown (dropdown)]
@@ -41,9 +43,8 @@
     (when-let [dropdown (dropdown)] (highlight-option-at index dropdown)))
   ([index dropdown]
     (let [options (dom/children dropdown)]
-      (when-let [highlighted-index (dom/get-data dropdown :highlighted-index)]
-        (let [highlighted (nth options highlighted-index)]
-          (dom/remove-class! highlighted "highlighted")))
+      (when-let [highlighted highlighted-option]
+          (dom/remove-class! highlighted "highlighted"))
       (let [new-highlighted (nth options index)]
         (dom/add-class! new-highlighted "highlighted")
         (dom/set-data! dropdown :highlighted-index index)))))
