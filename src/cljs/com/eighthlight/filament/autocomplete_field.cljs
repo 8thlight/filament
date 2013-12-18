@@ -1,5 +1,5 @@
 (ns com.eighthlight.filament.autocomplete-field
-  (:require-macros [hiccups.core :as h])
+  (:require-macros [hiccup.core :as h])
   (:require [clojure.string :as string]
             [com.eighthlight.filament.async :as async]
             [com.eighthlight.filament.fx :as fx]
@@ -7,7 +7,8 @@
             [domina :as dom]
             [domina.css :as css]
             [domina.events :as event]
-            [goog.style]))
+            [goog.style]
+            [hiccup.core]))
 
 (defn- dropdown [] (dom/by-id "autocomplete-dropdown"))
 

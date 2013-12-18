@@ -1,5 +1,4 @@
 (ns com.eighthlight.filament.forms
-  (:require-macros [hiccups.core :as h])
   (:require [clojure.string :as str]
             [domina :as dom]
             [domina.css :as css]

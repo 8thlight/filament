@@ -1,10 +1,11 @@
 (ns com.eighthlight.filament.modal
-  (:require-macros [hiccups.core :as h])
+  (:require-macros [hiccup.core :as h])
   (:require [com.eighthlight.filament.util :as util]
             [com.eighthlight.filament.fx :as fx]
             [domina :as dom]
             [domina.css :as css]
-            [domina.events :as event]))
+            [domina.events :as event]
+            [hiccup.core]))
 
 (defn modal-view
   ([id] (modal-view id "modal"))

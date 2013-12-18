@@ -1,11 +1,11 @@
 (ns com.eighthlight.filament.inplace-field
-  (:require-macros [hiccups.core :as h])
+  (:require-macros [hiccup.core :as h])
   (:require [com.eighthlight.filament.fx :as fx]
             [com.eighthlight.filament.util :as util]
             [domina :as dom]
             [domina.css :as css]
             [domina.events :as event]
-            [hiccups.runtime]))
+            [hiccup.core]))
 
 (def text-input [:input.inplace-field-input {:type "text"}])
 

@@ -1,12 +1,13 @@
 (ns com.eighthlight.filament.fx
-  (:require-macros [hiccups.core :as h])
+  (:require-macros [hiccup.core :as h])
   (:require [com.eighthlight.filament.util :as util]
             [domina :as dom]
             [domina.css :as css]
             [domina.events :as event]
             [goog.dom.forms :as forms]
             [goog.fx.easing :as ease]
-            [goog.fx.dom]))
+            [goog.fx.dom]
+            [hiccup.core]))
 
 (defn calc-duration [options]
   (or (:duration options) 500))

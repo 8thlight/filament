@@ -1,10 +1,11 @@
 (ns com.eighthlight.filament.forms-spec
-  (:require-macros [hiccups.core :as h]
+  (:require-macros [hiccup.core :as h]
                    [specljs.core :refer [describe context it should= with before around should-contain should-not-contain]])
   (:require [com.eighthlight.filament.forms :as forms]
             [com.eighthlight.filament.spec-helper :as helper]
             [domina :as dom]
             [domina.css :as css]
+            [hiccup.core]
             [specljs.core]))
 
 (describe "Forms"

@@ -1,11 +1,11 @@
 (ns com.eighthlight.filament.util
-  (:require-macros [hiccups.core :as h])
+  (:require-macros [hiccup.core :as h])
   (:require [clojure.string :as string]
             [clojure.walk :as walk]
             [domina :as dom]
             [domina.css :as css]
             [domina.events :as event]
-            [hiccups.runtime]))
+            [hiccup.core]))
 
 (defn ->options
   "Takes keyword argument and converts them to a map.  If the args are prefixed with a map, the rest of the

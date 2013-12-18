@@ -1,10 +1,11 @@
 (ns com.eighthlight.filament.util-spec
-  (:require-macros [hiccups.core :as h]
+  (:require-macros [hiccup.core :as h]
                    [specljs.core :refer [should should-not describe context it should= with before]])
   (:require [com.eighthlight.filament.spec-helper :as helper]
             [com.eighthlight.filament.util :as util]
             [domina :as dom]
             [domina.css :as css]
+            [hiccup.core]
             [specljs.core]))
 
 (describe "Util"
