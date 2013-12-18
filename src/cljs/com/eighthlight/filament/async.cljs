@@ -36,11 +36,13 @@
                     (recur ::init last (pop cs))))))))
    c))
 
-(defn handle-throttled-events [element event-type handler]
-  (let [event-channel (:chan (event-chan element event-type))
-        throttled (throttle event-channel 1000)]
-    (go
-      (while true
-        (let [e (<! throttled)]
-          (handler e))))))
+(defn handle-throttled-events
+  ([element event-type handler] (handle-throttled-events element event-type handler 1000))
+  ([element event-type handler msecs]
+   (let [event-channel (:chan (event-chan element event-type))
+         throttled (throttle event-channel msecs)]
+     (go
+       (while true
+         (let [e (<! throttled)]
+           (handler e)))))))
 

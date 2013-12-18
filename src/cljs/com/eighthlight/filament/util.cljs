@@ -20,34 +20,44 @@
 
 ; CLJS ONLY BELOW
 
+(defn raw [e]
+  (try
+    (event/raw-event e)
+    (catch js/Object o
+        e)))
+
 (def ENTER 13)
-(defn ENTER? [e] (= ENTER (.-keyCode (event/raw-event e))))
+(defn ENTER? [e] (= ENTER (.-keyCode (raw e))))
 
 (def ESC 27)
-(defn ESC? [e] (= ESC (.-keyCode (event/raw-event e))))
+(defn ESC? [e] (= ESC (.-keyCode (raw e))))
 
 (def SPACE 32)
-(defn SPACE? [e] (= SPACE (.-keyCode (event/raw-event e))))
+(defn SPACE? [e] (= SPACE (.-keyCode (raw e))))
 
 (def LEFT_ARROW 37)
-(defn LEFT_ARROW? [e] (= LEFT_ARROW (.-keyCode (event/raw-event e))))
+(defn LEFT_ARROW? [e] (= LEFT_ARROW (.-keyCode (raw e))))
 
 (def UP_ARROW 38)
-(defn UP_ARROW? [e] (= UP_ARROW (.-keyCode (event/raw-event e))))
+(defn UP_ARROW? [e] (= UP_ARROW (.-keyCode (raw e))))
 
 (def RIGHT_ARROW 39)
-(defn RIGHT_ARROW? [e] (= RIGHT_ARROW (.-keyCode (event/raw-event e))))
+(defn RIGHT_ARROW? [e] (= RIGHT_ARROW (.-keyCode (raw e))))
 
 (def DOWN_ARROW 40)
-(defn DOWN_ARROW? [e] (= DOWN_ARROW (.-keyCode (event/raw-event e))))
+(defn DOWN_ARROW? [e] (= DOWN_ARROW (.-keyCode (raw e))))
+
+(defn ARROW? [e]
+  (let [code (.-keyCode (raw e))]
+    (and (>= code LEFT_ARROW) (<= code DOWN_ARROW))))
 
 (def not-blank? (complement string/blank?))
 
 (defn override-click! [nodes action]
   (event/listen! nodes
-    :click (fn [e]
-             (event/prevent-default e)
-             (action e))))
+                 :click (fn [e]
+                          (event/prevent-default e)
+                          (action e))))
 
 (defn element-id [element]
   (dom/attr element :id))
@@ -65,7 +75,7 @@
                   default-error
                   text)]
     (dom/set-html! (css/sel "#flash-container")
-      (h/html [:div.flash [:h2.error message]]))))
+                   (h/html [:div.flash [:h2.error message]]))))
 
 (defn clear-flash []
   (dom/set-html! (css/sel "#flash-container") ""))

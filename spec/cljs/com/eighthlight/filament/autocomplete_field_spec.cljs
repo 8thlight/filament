@@ -1,6 +1,6 @@
 (ns com.eighthlight.filament.autocomplete-field-spec
   (:require-macros [hiccups.core :as h]
-                   [specljs.core :refer [describe context it should= should-contain with before around]])
+                   [specljs.core :refer [describe context it should= should-contain with before around should-invoke should-not-invoke]])
   (:require [com.eighthlight.filament.async :as async]
             [com.eighthlight.filament.autocomplete-field :as ac]
             [com.eighthlight.filament.fx :as fx]
@@ -18,15 +18,21 @@
     (dom/set-html! (css/sel "body") (h/html [:input#testfield {:type "text" :name "testfield"}])))
   (with input (dom/by-id "testfield"))
   (with trail (atom []))
-  (around [it]
-    (with-redefs [async/handle-throttled-events event/listen!]
-      (it)))
 
   (it "arms a text field with search behavior"
-    (ac/arm-field @input {:on-search #(swap! @trail conj :armed)})
-    (dom/set-value! @input "change")
-    (event/dispatch! @input :keyup {})
-    (should= [:armed] @@trail))
+    (should-not-invoke
+      async/handle-throttled-events {}
+      (ac/arm-field @input {:on-search #(swap! @trail conj :armed)})
+      (dom/set-value! @input "change")
+      (event/dispatch! @input :keyup {})
+      (should= [:armed] @@trail)))
+
+  (it "arms a text field with throttled search behavior"
+    (should-invoke
+      async/handle-throttled-events {:with [:* :* :* 500]}
+      (ac/arm-field @input {:throttle 500 :on-search #(swap! @trail conj :armed)})
+      (dom/set-value! @input "change")
+      (event/dispatch! @input :keyup {})))
 
   (it "returns the value of the armed text field when searching"
     (ac/arm-field @input {:on-search #(swap! @trail conj %)})
@@ -34,11 +40,24 @@
     (event/dispatch! @input :keyup {})
     (should= ["Piper"] @@trail))
 
-  (it "does invoke callback if text hasn't changed"
+  (it "DOESN'T invoke callback if text hasn't changed"
     (dom/set-value! @input "Piper")
     (ac/arm-field @input {:on-search #(swap! @trail conj %)})
     (event/dispatch! @input :keyup {})
+    (should= [] @@trail))
+
+  (it "DOES invoke callback if text hasn't changed but arrow is pressed"
+    (dom/set-value! @input "Piper")
+    (ac/arm-field @input {:on-search #(swap! @trail conj %)})
+    (event/dispatch! @input :keyup {"keyCode" util/DOWN_ARROW})
     (should= ["Piper"] @@trail))
+
+  (it "DOESN'T invoke callback if text hasn't changed, arrow is pressed, but dropdown is open"
+    (dom/set-value! @input "Piper")
+    (ac/arm-field @input {:on-search #(swap! @trail conj %)})
+    (ac/show-dropdown @input [])
+    (event/dispatch! @input :keyup {"keyCode" util/DOWN_ARROW})
+    (should= [] @@trail))
 
   (context "Dropdown"
 
@@ -85,6 +104,10 @@
 
     (it "goes away on when the input loses focus"
       (event/dispatch! @input :blur {})
+      (should= nil (ac/dropdown)))
+
+    (it "goes away on ECS pressed"
+      (event/dispatch! @input :keydown {"keyCode" util/ESC})
       (should= nil (ac/dropdown)))
 
     )
