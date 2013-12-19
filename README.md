@@ -1,4 +1,4 @@
-<img src="https://raw.github.com/8thlight/filament/master/logo.jpg" style="float: right;"/>
+<img src="https://raw.github.com/8thlight/filament/master/logo.jpg" alt="Filament logo" title="Filament" align="right"/>
 Filament
 ======
 
