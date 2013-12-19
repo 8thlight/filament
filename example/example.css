@@ -1,3 +1,6 @@
+/* --------------------------------------
+*    Autocomplete Field Styles
+*  -------------------------------------- */
 .autocomplete-dropdown {
     background-color: white;
     border: 1px solid #25a8e0;
@@ -27,4 +30,73 @@
 .autocomplete-dropdown .highlighted {
     background-color: #25a8e0;
     color: white;
+}
+
+/* --------------------------------------
+*    Modal Styles
+*  -------------------------------------- */
+
+.modal-backdrop {
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9000;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.modal {
+    outline: none;
+    aria-hidden: true;
+    z-index: 9001;
+    overflow: visible;
+    max-width: 800px;
+    width: 90%;
+    margin: 100px auto 0 auto;
+    background-color: #ffffff;
+
+    /*IE6-7*/
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+.modal-header {
+    padding: 1em 1em 0;
+}
+
+.modal-header button {
+  float: right;
+  font-size: 1.2em;
+  font-weight: 600;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.modal-header h3 {
+    width: 95%;
+    display: inline-block;
+}
+
+.modal-body {
+    clear: both;
+    max-height: 85%;
+    overflow-y: auto;
+    padding: 1em;
 }
