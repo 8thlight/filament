@@ -77,7 +77,7 @@
           (not= "SELECT" (.-tagName (event/target e))))
     (hide! modal)))
 
-(defn- bind-listeners [modal class]
+(defn- bind-listeners [modal]
   (event/listen! modal :keyup (partial process-keyup modal))
   (util/override-click! modal (fn [e] (hide! modal)))
   (util/override-click! (close-button modal) (fn [e] (hide! modal)))
@@ -99,5 +99,5 @@
   ([id] (create-modal id "modal"))
   ([id class]
     (let [modal (dom/single-node (h/html (modal-view id class)))]
-      (bind-listeners modal class)
+      (bind-listeners modal)
       modal)))
