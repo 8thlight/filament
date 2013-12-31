@@ -36,7 +36,7 @@
               :on-end (fn [e] (dom/set-style! modal :opacity 100))))
 
 (defn hide!
-  "Hides the modal and dataches it from the DOM."
+  "Hides the modal and detaches it from the DOM."
   [modal]
   (fx/fade-out modal
     :duration 100
@@ -84,7 +84,7 @@
   (util/override-click! (modal-node modal) #(event/stop-propagation %)))
 
 (defn create-modal
-  "Returns a datached modal DOM element with no content.  This is typically used to create the modal at a high level
+  "Returns a detached modal DOM element with no content.  This is typically used to create the modal at a high level
   that can be reused. See populate!, show!, and hide! for usage.
   The id parameter is added to the root DOM element so that it can be retreived easily.
   The optional class parameter will be prefixed onto all classes applied to the elements. Defaults to 'modal'.
