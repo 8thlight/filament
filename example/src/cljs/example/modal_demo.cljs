@@ -5,6 +5,11 @@
             [domina :as dom]
             [hiccup.core]))
 
+(def dom [:div.example
+          [:h2 "com.eighthlight.filament.modal"]
+          [:p "Clicking on the button will open a modal.  Try it!"]
+          [:button {:id "click-me"} "Click me!"]])
+
 (def modal (modal/create-modal "modal"))
 
 (defn show-modal []
@@ -15,5 +20,5 @@
   (util/override-click! (dom/by-id "click-me") show-modal))
 
 (defn demo-modal []
-  (dom/append! (.-body js/document) (h/html [:p [:button {:id "click-me"} "Click me!"]]))
+  (dom/append! (.-body js/document) (h/html dom))
   (arm-button))

@@ -3,7 +3,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[com.8thlight/filament "1.1.3"]
+  :dependencies [[com.8thlight/filament "1.1.4"]
                  [com.8thlight/hiccup "1.1.1"]
                  [org.clojure/clojure "1.5.1"]]
 

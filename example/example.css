@@ -1,4 +1,28 @@
 /* --------------------------------------
+*    Styles soley for the purpose of this example
+*  -------------------------------------- */
+
+body {
+    font-family: sans-serif "Helvetica";
+}
+
+.example {
+    border: 1px solid gray;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.example h2 {
+    margin-top: 5px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+label {
+    display: block;
+    margin-top: 5px;
+}
+
+/* --------------------------------------
 *    Autocomplete Field Styles
 *  -------------------------------------- */
 .autocomplete-dropdown {
@@ -30,6 +54,20 @@
 .autocomplete-dropdown .highlighted {
     background-color: #25a8e0;
     color: white;
+}
+
+/* --------------------------------------
+*    Forms Styles
+*  -------------------------------------- */
+
+p.field-errors {
+  margin: 0;
+  padding: 0;
+  color: #E03725;
+}
+
+.field-error {
+  border: 1px solid #E03725;
 }
 
 /* --------------------------------------

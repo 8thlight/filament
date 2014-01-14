@@ -13,9 +13,12 @@
              "indigo"
              "violet"])
 
-(def dom [:form {:action "/fooey" :autocomplete "off"}
+(def dom [:div.example
+          [:h2 "com.eighthlight.filament.autocomplete-field"]
+          [:p "The field below will auto complete the colors of the rainbow (red, orange, yellow, green, blue, indigo, violet)."]
+          [:form {:action "/fooey" :autocomplete "off"}
           [:label {:for "autocomplete-field"} "Autocomplete:"]
-          [:input#autocomplete-field {:type "text"}]])
+          [:input#autocomplete-field {:type "text"}]]])
 
 (defn autocomplete-on-select [[name value]]
   (dom/set-value! (dom/by-id "autocomplete-field") value))
