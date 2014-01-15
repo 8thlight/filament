@@ -73,3 +73,12 @@
   []
   (when-let [container (dom/by-id "flash-container")]
     (dom/destroy! container)))
+
+(defn flash-messages
+  "Returns a map of currently displayed flash messages in the form:
+
+    {:error [] :notice [] :success []}"
+  []
+  {:error (map dom/text (rest (dom/children (dom/by-id "flash-errors"))))
+   :notice (map dom/text (rest (dom/children (dom/by-id "flash-notices"))))
+   :success (map dom/text (rest (dom/children (dom/by-id "flash-successes"))))})

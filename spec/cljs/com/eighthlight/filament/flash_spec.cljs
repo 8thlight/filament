@@ -73,10 +73,28 @@
     (should= nil (dom/by-id "flash-notices"))
     (should= nil (dom/by-id "flash-successes")))
 
-
   (it "css classes"
     (should-contain "flash-container" (dom/classes (flash/flash-container-node)))
     (should-contain "flash-errors" (dom/classes (flash/errors-node)))
     (should-contain "flash-notices" (dom/classes (flash/notices-node)))
     (should-contain "flash-successes" (dom/classes (flash/successes-node))))
+
+  (it "returns all the flash messages"
+    (should= {:error [] :notice [] :success []} (flash/flash-messages))
+
+    (flash/flash-error! "1")
+    (should= {:error ["1"] :notice [] :success []} (flash/flash-messages))
+
+    (flash/flash-notice! "2")
+    (should= {:error ["1"] :notice ["2"] :success []} (flash/flash-messages))
+
+    (flash/flash-success! "3")
+    (should= {:error ["1"] :notice ["2"] :success ["3"]} (flash/flash-messages))
+
+    (flash/flash-success! "4")
+    (should= {:error ["1"] :notice ["2"] :success ["3" "4"]} (flash/flash-messages))
+
+    (flash/clear-flash!)
+    (should= {:error [] :notice [] :success []} (flash/flash-messages))
+    )
   )
