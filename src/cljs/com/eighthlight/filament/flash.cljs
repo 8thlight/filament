@@ -10,7 +10,7 @@
   []
   (or
     (dom/by-id "flash-container")
-    (let [container (dom/single-node (h/html [:div#flash-container]))]
+    (let [container (dom/single-node (h/html [:div#flash-container.flash-container]))]
       (dom/append! (.-body js/document) container)
       container)))
 
@@ -18,7 +18,7 @@
   (let [name (str "flash-" section)]
     (or
       (dom/by-id name)
-      (let [section-node (dom/single-node (h/html [:div {:id name} [:a.flash-close "X"]]))]
+      (let [section-node (dom/single-node (h/html [:div {:id name :class name} [:a.flash-close "X"]]))]
         (util/override-click! (first (dom/children section-node)) #(dom/destroy! section-node))
         (dom/append! (flash-container-node) section-node)
         section-node))))
@@ -39,8 +39,8 @@
   "Adds an error flash to the DOM.
 
   CSS:
-    #flash-container - a div added to the body element so consider using absolute/fixed positioning
-    #flash-errors - a div inside the flash-container that will hold all the error flashes
+    .flash-container - a div added to the body element so consider using absolute/fixed positioning
+    .flash-errors - a div inside the flash-container that will hold all the error flashes
     a.flash-close - the first node in a flash section. Contains the text \"X\". Clicking it will close the section.
     p.flash-error - one is added to the flash-errors div for each message"
   [message]
@@ -50,8 +50,8 @@
   "Adds an notice flash to the DOM.
 
   CSS:
-    #flash-container - a div added to the body element so consider using absolute/fixed positioning
-    #flash-notices - a div inside the flash-container that will hold all the notice flashes
+    .flash-container - a div added to the body element so consider using absolute/fixed positioning
+    .flash-notices - a div inside the flash-container that will hold all the notice flashes
     a.flash-close - the first node in a flash section. Contains the text \"X\". Clicking it will close the section.
     p.flash-notice - one is added to the flash-notices div for each message"
   [message]
@@ -61,8 +61,8 @@
   "Adds an success flash to the DOM.
 
   CSS:
-    #flash-container - a div added to the body element so consider using absolute/fixed positioning
-    #flash-successes - a div inside the flash-container that will hold all the success flashes
+    .flash-container - a div added to the body element so consider using absolute/fixed positioning
+    .flash-successes - a div inside the flash-container that will hold all the success flashes
     a.flash-close - the first node in a flash section. Contains the text \"X\". Clicking it will close the section.
     p.flash-success - one is added to the flash-successes div for each message"
   [message]

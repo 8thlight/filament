@@ -72,4 +72,11 @@
     (should= nil (dom/by-id "flash-errors"))
     (should= nil (dom/by-id "flash-notices"))
     (should= nil (dom/by-id "flash-successes")))
+
+
+  (it "css classes"
+    (should-contain "flash-container" (dom/classes (flash/flash-container-node)))
+    (should-contain "flash-errors" (dom/classes (flash/errors-node)))
+    (should-contain "flash-notices" (dom/classes (flash/notices-node)))
+    (should-contain "flash-successes" (dom/classes (flash/successes-node))))
   )

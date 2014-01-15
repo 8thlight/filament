@@ -57,17 +57,81 @@ label {
 }
 
 /* --------------------------------------
+*    Flash Styles
+*  -------------------------------------- */
+
+.flash-container {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.flash-errors, .flash-notices, .flash-successes {
+    position: relative;
+    -moz-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid;
+    border-top: 0;
+    font-size: 1em;
+    font-weight: normal;
+    margin: auto auto 5px;
+    padding: 1em;
+    text-align: center;
+    max-width: 50%;
+}
+
+.flash-errors {
+    background: #ff6555;
+    color: #a64237;
+    border-color: #a64237;
+}
+
+.flash-notices {
+    background-color: #ce9853;
+    color: #9c5c2b;
+    border-color: #9c5c2b;
+}
+
+.flash-successes {
+    background-color: #67f091;
+    color: #49a966;
+    border-color: #49a966;
+}
+
+.flash-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 5px;
+}
+
+a.flash-close:hover {
+    color: white;
+    cursor: pointer;
+}
+
+p.flash-error, p.flash-notice, p.flash-success {
+    margin: 0;
+}
+
+/* --------------------------------------
 *    Forms Styles
 *  -------------------------------------- */
 
 p.field-errors {
-  margin: 0;
-  padding: 0;
-  color: #E03725;
+    margin: 0;
+    padding: 0;
+    color: #E03725;
 }
 
 .field-error {
-  border: 1px solid #E03725;
+    border: 1px solid #E03725;
 }
 
 /* --------------------------------------
@@ -113,18 +177,18 @@ p.field-errors {
 }
 
 .modal-header button {
-  float: right;
-  font-size: 1.2em;
-  font-weight: 600;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  border: none;
-  cursor: pointer;
-  color: #333;
+    float: right;
+    font-size: 1.2em;
+    font-weight: 600;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
 }
 
 .modal-header h3 {
