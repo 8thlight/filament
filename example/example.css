@@ -66,6 +66,7 @@ label {
     margin: auto;
     width: 100%;
     text-align: center;
+    z-index: 9100;
 }
 
 .flash-errors, .flash-notices, .flash-successes {
