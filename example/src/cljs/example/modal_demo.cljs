@@ -10,10 +10,19 @@
           [:p "Clicking on the button will open a modal.  Try it!"]
           [:button {:id "click-me"} "Click me!"]])
 
+(def modal-content [:div
+                    [:p "This is how you generate a modal using Filament."]
+                    [:p "The following inputs should popup their pickers.  When the popups are open, pressing exscape should not close the modal."]
+                    [:input {:type "file" :name "file"}][:br]
+                    [:input {:type "date" :name "date"}][:br]
+                    [:input {:type "text" :name "text"}][:br]
+                    [:select {:name "select"} [:option "One"][:option "Two"][:option "Three"]][:br]
+                    [:textarea {:name "textarea"}]])
+
 (def modal (modal/create-modal "modal"))
 
 (defn show-modal []
-  (modal/populate! modal {:title "Modal" :content "This is how you generate a modal using Filament."})
+  (modal/populate! modal {:title "Modal" :content (h/html modal-content)})
   (modal/show! modal))
 
 (defn arm-button []

@@ -10,13 +10,13 @@
   "Returns a hiccup data structure representing the modal DOM."
   ([id] (modal-view id "modal"))
   ([id class]
-    [:div {:tabindex "0" :id id :class (str class "-backdrop")} ; tabindex is necessary to grant focus
-     [:div {:class class}
-      [:div {:class (str class "-header")}
-       [:button {:type "button" :class (str class "-close-button")}
-        "&#x2715;"]
-       [:h3]]
-      [:div {:class (str class "-body")}]]]))
+   [:div {:tabindex "0" :id id :class (str class "-backdrop")} ; tabindex is necessary to grant focus
+    [:div {:class class}
+     [:div {:class (str class "-header")}
+      [:button {:type "button" :class (str class "-close-button")}
+       "&#x2715;"]
+      [:h3]]
+     [:div {:class (str class "-body")}]]]))
 
 (defn modal-node [modal] (first (dom/children modal)))
 (defn header-node [modal] (first (dom/children (modal-node modal))))
@@ -39,10 +39,10 @@
   "Hides the modal and dataches it from the DOM."
   [modal]
   (fx/fade-out modal
-    :duration 100
-    :on-finish #(do
-                  (dom/detach! modal)
-                  (fx/hide! modal))))
+               :duration 100
+               :on-finish #(do
+                            (dom/detach! modal)
+                            (fx/hide! modal))))
 
 (defn set-title!
   "Populates the title of the modal."
@@ -55,7 +55,7 @@
   (dom/text (title-node modal)))
 
 (defn set-content!
-   "Populates the body of the modal."
+  "Populates the body of the modal."
   [modal content]
   (dom/set-html! (body modal) content))
 
@@ -73,15 +73,15 @@
   (populate! modal {:title "" :content ""}))
 
 (defn- process-keyup [modal e]
-  (when (and (util/ESC? e)
-          (not= "SELECT" (.-tagName (event/target e))))
-    (hide! modal)))
+  (when (util/ESC? e)
+    (if (#{"SELECT" "INPUT" "TEXTAREA"} (.-tagName (event/target e)))
+      (fx/focus! modal)
+      (hide! modal))))
 
 (defn- bind-listeners [modal class]
   (event/listen! modal :keyup (partial process-keyup modal))
-  (util/override-click! modal (fn [e] (hide! modal)))
-  (util/override-click! (close-button modal) (fn [e] (hide! modal)))
-  (util/override-click! (modal-node modal) #(event/stop-propagation %)))
+  (event/listen! modal :click (fn [e] (when (= modal (event/target e)) (hide! modal))))
+  (util/override-click! (close-button modal) (fn [e] (hide! modal))))
 
 (defn create-modal
   "Returns a datached modal DOM element with no content.  This is typically used to create the modal at a high level
@@ -98,6 +98,6 @@
     .modal-body - container for the modal content"
   ([id] (create-modal id "modal"))
   ([id class]
-    (let [modal (dom/single-node (h/html (modal-view id class)))]
-      (bind-listeners modal class)
-      modal)))
+   (let [modal (dom/single-node (h/html (modal-view id class)))]
+     (bind-listeners modal class)
+     modal)))

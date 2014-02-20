@@ -1,3 +1,12 @@
+# 1.2.2
+
+* relaxes mouse event capture on modal so that popups (file pickers, date pickers, etc) work as expected
+* better handling of esc key-up when inside input elements in modals
+
+# 1.2.1
+
+* adds flash message fns
+
 # 1.2.0
 
 * adds flash
