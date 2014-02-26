@@ -1,6 +1,6 @@
 (ns com.eighthlight.filament.autocomplete-field-spec
   (:require-macros [hiccup.core :as h]
-                   [specljs.core :refer [describe context it should= should-contain with before around should-invoke should-not-invoke]])
+                   [speclj.core :refer [describe context it should= should-contain with before around should-invoke should-not-invoke]])
   (:require [com.eighthlight.filament.async :as async]
             [com.eighthlight.filament.autocomplete-field :as ac]
             [com.eighthlight.filament.fx :as fx]
@@ -10,7 +10,7 @@
             [domina.css :as css]
             [domina.events :as event]
             [hiccup.core]
-            [specljs.core]))
+            [speclj.core]))
 
 (describe "Autocomplete Field"
 

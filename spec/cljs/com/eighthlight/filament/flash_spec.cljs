@@ -1,12 +1,12 @@
 (ns com.eighthlight.filament.flash-spec
   (:require-macros [hiccup.core :as h]
-                   [specljs.core :refer [describe context it should= should-not= with before around should-contain should-not-contain]])
+                   [speclj.core :refer [describe context it should= should-not= with before around should-contain should-not-contain]])
   (:require [com.eighthlight.filament.flash :as flash]
             [com.eighthlight.filament.spec-helper :as helper]
             [domina :as dom]
             [domina.css :as css]
             [hiccup.core]
-            [specljs.core]))
+            [speclj.core]))
 
 (describe "Flash"
 

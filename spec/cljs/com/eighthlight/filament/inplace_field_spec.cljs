@@ -1,6 +1,6 @@
 (ns com.eighthlight.filament.inplace-field-spec
   (:require-macros [hiccup.core :as h]
-                   [specljs.core :refer [describe context it should= with before around should-contain should-not-contain stub with-stubs should-have-invoked should-not-have-invoked]])
+                   [speclj.core :refer [describe context it should= with before around should-contain should-not-contain stub with-stubs should-have-invoked should-not-have-invoked]])
   (:require [com.eighthlight.filament.fx :as fx]
             [com.eighthlight.filament.inplace-field :as inplace]
             [com.eighthlight.filament.modal :as modal]
@@ -10,7 +10,7 @@
             [domina.css :as css]
             [domina.events :as event]
             [hiccup.core]
-            [specljs.core]))
+            [speclj.core]))
 
 (describe "Inplace Field"
 

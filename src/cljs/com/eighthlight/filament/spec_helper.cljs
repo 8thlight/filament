@@ -1,9 +1,9 @@
 (ns com.eighthlight.filament.spec-helper
-  (:require-macros [specljs.core :refer [after around before]])
+  (:require-macros [speclj.core :refer [after around before]])
   (:require [domina :as dom]
             [domina.css :as css]
             [domina.events :as event]
-            [specljs.core]))
+            [speclj.core]))
 
 (defn with-clean-dom []
   (after

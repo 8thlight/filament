@@ -1,3 +1,7 @@
+# 1.3.0
+
+* uses speclj 3.0.0
+
 # 1.2.2
 
 * relaxes mouse event capture on modal so that popups (file pickers, date pickers, etc) work as expected

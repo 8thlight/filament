@@ -1,12 +1,12 @@
 (ns com.eighthlight.filament.fx-spec
   (:require-macros [hiccup.core :as h]
-                   [specljs.core :refer [describe it should=]])
+                   [speclj.core :refer [describe it should=]])
   (:require [com.eighthlight.filament.fx :as fx]
             [com.eighthlight.filament.spec-helper :as helper]
             [domina :as dom]
             [domina.css :as css]
             [hiccup.core]
-            [specljs.core]))
+            [speclj.core]))
 
 (describe "FX"
 

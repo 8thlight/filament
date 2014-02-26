@@ -1,5 +1,5 @@
 (ns com.eighthlight.filament.modal-spec
-  (:require-macros [specljs.core :refer [describe it should= should-not=]])
+  (:require-macros [speclj.core :refer [describe it should= should-not=]])
   (:require [com.eighthlight.filament.fx :as fx]
             [com.eighthlight.filament.modal :as modal]
             [com.eighthlight.filament.spec-helper :as helper]
@@ -8,7 +8,7 @@
             [domina.css :as css]
             [domina.xpath :as xpath]
             [domina.events :as event]
-            [specljs.core]))
+            [speclj.core]))
 
 (describe "Modal"
 

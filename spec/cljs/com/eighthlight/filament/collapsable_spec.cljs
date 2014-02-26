@@ -1,12 +1,12 @@
 (ns com.eighthlight.filament.collapsable-spec
-  (:require-macros [specljs.core :refer [describe it should= with before around]])
+  (:require-macros [speclj.core :refer [describe it should= with before around]])
   (:require [com.eighthlight.filament.spec-helper :as helper]
             [com.eighthlight.filament.collapsable :as c]
             [com.eighthlight.filament.fx :as fx]
             [domina :as dom]
             [domina.css :as css]
             [domina.events :as event]
-            [specljs.core]))
+            [speclj.core]))
 
 (describe "Collapsable"
 

@@ -1,4 +1,4 @@
-(defproject com.8thlight/filament "1.2.2"
+(defproject com.8thlight/filament "1.3.0"
   :description "Rich client utilities"
   :url "http://github.com/8thlight/filament"
   :license {:name "Eclipse Public License"
@@ -11,10 +11,8 @@
                  ]
 
   :profiles {:dev {:dependencies [[org.clojure/clojurescript "0.0-2014"]
-                                  [speclj "2.9.1"]
-                                  [specljs "2.9.1"]]}}
-  :plugins [[speclj "2.9.1"]
-            [specljs "2.9.1"]
+                                  [speclj "3.0.0"]]}}
+  :plugins [[speclj "3.0.0"]
             [lein-cljsbuild "1.0.0"]]
 
   :cljsbuild ~(let [run-specs ["bin/specljs" "js/filament.js"]]

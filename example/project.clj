@@ -8,10 +8,8 @@
                  [org.clojure/clojure "1.5.1"]]
 
   :profiles {:dev {:dependencies [[org.clojure/clojurescript "0.0-2014"]
-                                  [speclj "2.9.1"]
-                                  [specljs "2.9.1"]]}}
-  :plugins [[speclj "2.9.1"]
-            [specljs "2.9.1"]
+                                  [speclj "3.0.0"]]}}
+  :plugins [[speclj "3.0.0"]
             [lein-cljsbuild "1.0.0"]]
 
   :cljsbuild ~(let [run-specs ["bin/specljs" "js/example_dev.js"]]
