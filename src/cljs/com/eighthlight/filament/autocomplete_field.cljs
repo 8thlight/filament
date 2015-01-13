@@ -15,21 +15,27 @@
   (if-let [dropdown (dropdown)]
     (dom/children dropdown)))
 
-(defn- possible-search-handler [text-field callback]
+(defn- long-enough? [query smallest-query-length]
+  (>= (count query) smallest-query-length))
+
+(defn- possible-search-handler [text-field callback smallest-query-length]
   (let [last-query (atom (dom/value text-field))]
     (fn [e]
       (let [query (dom/value text-field)]
-        (when (or (and (util/ARROW? e) (not (dropdown))) (not (= @last-query query)))
+        (when (or (and (util/ARROW? e) (not (dropdown)))
+                  (and
+                    (not (= @last-query query))
+                    (long-enough? query smallest-query-length)))
           (reset! last-query query)
           (cond
             (util/ENTER? e) nil ; don't search on selection
             (util/ESC? e) nil ; exit
             :else (callback query)))))))
 
-(defn- arm-search-callback [text-field callback throttle]
+(defn- arm-search-callback [text-field callback throttle smallest-query-length]
   (if (number? throttle)
-    (async/handle-throttled-events text-field "keyup" (possible-search-handler text-field callback) throttle)
-    (event/listen! text-field :keyup (possible-search-handler text-field callback))))
+    (async/handle-throttled-events text-field "keyup" (possible-search-handler text-field callback smallest-query-length) throttle)
+    (event/listen! text-field :keyup (possible-search-handler text-field callback smallest-query-length))))
 
 (defn- close-dropdown []
   (when-let [dropdown (dropdown)]
@@ -107,13 +113,17 @@
   :on-select - a fn that take a dropdown payload ([<display name> <value>]) and is called when a dropdown item
     is selected.
   :throttle - number of millisecond.  Searches will not take place more frequently then the specified period.
-    By default, every change will trigger a search."
+    By default, every change will trigger a search.
+  :smallest-query-length - minimum size of query term to issue a search query.  Default 1"
   [text-field callbacks]
   (dom/set-data! text-field :on-select (:on-select callbacks))
   (event/listen! text-field :keydown (partial handle-dropdown-navigation text-field))
   (event/listen! text-field :keyup (partial handle-possible-selection text-field))
   (when-let [on-search (:on-search callbacks)]
-    (arm-search-callback text-field on-search (:throttle callbacks)))
+    (arm-search-callback text-field
+                         on-search
+                         (:throttle callbacks)
+                         (get callbacks :smallest-query-length 1)))
   (event/listen! text-field :blur close-dropdown))
 
 (defn show-dropdown
