@@ -47,6 +47,18 @@
     (event/dispatch! @input :keyup {})
     (should= [] @@trail))
 
+  (it "DOESN'T invoke callback if query is too small"
+    (ac/arm-field @input {:on-search #(swap! @trail conj %) :smallest-query-length 4})
+    (dom/set-value! @input "Pop")
+    (event/dispatch! @input :keyup {})
+    (should= [] @@trail))
+
+  (it "DOES invoke callback if query is the right size"
+    (ac/arm-field @input {:on-search #(swap! @trail conj %) :smallest-query-length 4})
+    (dom/set-value! @input "Logs")
+    (event/dispatch! @input :keyup {})
+    (should= ["Logs"] @@trail))
+
   (it "DOES invoke callback if text hasn't changed but arrow is pressed"
     (dom/set-value! @input "Piper")
     (ac/arm-field @input {:on-search #(swap! @trail conj %)})
