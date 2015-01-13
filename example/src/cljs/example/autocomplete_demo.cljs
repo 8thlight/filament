@@ -32,4 +32,5 @@
   (dom/append! (.-body js/document) (h/html dom))
   (let [field (dom/by-id "autocomplete-field")]
     (autocomplete/arm-field field {:on-select autocomplete-on-select
-                                   :on-search autocomplete-on-search})))
+                                   :on-search autocomplete-on-search
+                                   :smallest-query-length 3})))

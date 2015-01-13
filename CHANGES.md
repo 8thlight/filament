@@ -1,3 +1,7 @@
+# 1.3.1
+
+ * adds the smallest-query-length option to autocomplete
+
 # 1.3.0
 
 * uses speclj 3.0.0
